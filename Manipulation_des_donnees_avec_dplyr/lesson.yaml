@@ -299,10 +299,3 @@
 
 - Class: text
   Output: "Dans cette leçon, vous avez appris à manipuler des données à l'aide des cinq fonctions principales de dplyr. Dans la prochaine leçon, nous verrons comment tirer parti de certaines autres fonctions utiles de dplyr pour faciliter votre vie d'analyste de données."
-
-- Class: mult_question
-  Output: "Souhaitez-vous informer quelqu'un de votre réussite à cette cette leçon par e-mail ?"
-  CorrectAnswer: NULL
-  AnswerChoices: Oui; Non
-  AnswerTests: notify()
-  Hint: NULL
