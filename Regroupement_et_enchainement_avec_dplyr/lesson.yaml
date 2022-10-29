@@ -1,0 +1,251 @@
+- Class: meta
+  Course: Obtenir et Nettoyer des Données
+  Lesson: Regroupement et enchainement avec dplyr
+  Author: Nick Carchedi, translated by GTAP/MDK
+  Type: Standard
+  Organization: JHU Biostat, translated by GTAP/MDK
+  Version: 2.2.13
+  
+- Class: text
+  Output: "Avertissement : Cette leçon fait appel à la fonction View(). View() peut ne pas fonctionner correctement dans tous les environnements de programmation. Nous recommandons vivement l'utilisation de RStudio pour cette leçon."
+
+- Class: text
+  Output: "Dans la dernière leçon, vous avez appris les cinq principaux \"verbes\" de manipulation de données de dplyr : select(), filter(), arrange(), mutate(), et summarize(). Le dernier de ces verbes, summarize(), est le plus puissant lorsqu'il est appliqué à des données groupées."
+
+- Class: text
+  Output: "L'idée principale derrière le regroupement de données est que vous voulez diviser votre ensemble de données en groupes de lignes sur la base des valeurs d'une ou plusieurs variables. C'est la fonction group_by() qui s'en charge."
+
+- Class: text
+  Output: "Nous allons continuer là où nous nous sommes arrêtés avec le journal des téléchargements CRAN de RStudio du 8 juillet 2014, qui contient des informations sur environ 225 000 téléchargements de paquets R (http://cran-logs.rstudio.com/)."
+
+- Class: cmd_question
+  Output: "Comme pour la dernière leçon, le paquetage dplyr a été automatiquement installé (si nécessaire) et chargé au début de cette leçon. Normalement, c'est quelque chose que vous devriez faire vous-même. Pour en prendre l'habitude, tapez library(dplyr) maintenant pour charger à nouveau le paquetage."
+  CorrectAnswer: library(dplyr)
+  AnswerTests: omnitest(correctExpr='library(dplyr)')
+  Hint: "Utilisez library(dplyr) pour charger le paquet dplyr."
+
+- Class: cmd_question
+  Output: "J'ai mis l'ensemble de données à votre disposition dans un cadre de données appelé mon_df. Placez-le dans un 'cadre de données tbl' en utilisant la fonction as_tibble() et stockez le résultat dans un objet appelé cran. Si vous n'êtes pas sûr de ce dont je parle, vous devriez commencer par la leçon précédente. Sinon, c'est en forgeant qu'on devient forgeron !"
+  CorrectAnswer: cran <- as_tibble(mon_df)
+  AnswerTests: omnitest(correctExpr='cran <- as_tibble(mon_df)')
+  Hint: "Tapez cran <- as_tibble(mon_df) pour stocker les données dans un nouvel as_tibble appelé cran."
+
+- Class: cmd_question
+  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le dataframe original de votre espace de travail avec rm(\"mon_df\")."
+  CorrectAnswer: rm("mon_df")
+  AnswerTests: omnitest(correctExpr='rm("mon_df")')
+  Hint: "Utilisez rm(\"mon_df\") pour supprimer le cadre de données original de votre espace de travail."
+
+- Class: cmd_question
+  Output: "Imprimez cran à la console."
+  CorrectAnswer: cran
+  AnswerTests: omnitest(correctExpr='cran')
+  Hint: "Tapez cran pour imprimer son contenu."
+
+- Class: cmd_question
+  Output: "Notre premier objectif est de regrouper les données par nom de paquet. Affichez le fichier d'aide pour group_by()."
+  CorrectAnswer: ?group_by
+  AnswerTests: any_of_exprs('?group_by', 'help(group_by)')
+  Hint: "Utilisez ?group_by pour faire apparaître la documentation."
+
+- Class: cmd_question
+  Output: "Regroupez cran par la variable paquet et stockez le résultat dans un nouvel objet appelé par_paquet."
+  CorrectAnswer: par_paquet <- group_by(cran, package)
+  AnswerTests: omnitest('par_paquet <- group_by(cran, package)')
+  Hint: "Stockez le résultat de group_by(cran, package) dans un nouvel objet appelé par_paquet."
+
+- Class: cmd_question
+  Output: "Jetons un coup d'oeil à par_paquet. Imprimez-le sur la console."
+  CorrectAnswer: par_paquet
+  AnswerTests: any_of_exprs('par_paquet', 'print(par_paquet)')
+  Hint: "Tapez par_paquet pour voir son contenu."
+
+- Class: text
+  Output: "En haut de la sortie ci-dessus, vous verrez 'Groups : package', ce qui nous indique que cette tbl a été groupée par la variable package. Tout le reste semble identique, mais maintenant toute opération que nous appliquons aux données groupées aura lieu sur une base par paquet."
+
+- Class: text
+  Output: "Rappelez-vous que lorsque nous avons appliqué mean(size) à l'as_tibble original via summarize(), il a renvoyé un seul nombre -- la moyenne de toutes les valeurs de la colonne size. Ce nombre peut nous intéresser, mais ne serait-il pas beaucoup plus intéressant de regarder la taille moyenne de téléchargement pour chaque paquet unique ?"
+
+- Class: cmd_question
+  Output: "C'est exactement ce que vous obtiendrez si vous utilisez summarize() pour appliquer mean(size) aux données groupées dans par_paquet. Essayez-le."
+  CorrectAnswer: summarize(par_paquet, mean(size))
+  AnswerTests: any_of_exprs('summarize(par_paquet, mean(size))', 'summarise(par_paquet, mean(size))')
+  Hint: "Appelez summarize() avec deux arguments : par_paquet et mean(size)."
+
+- Class: text
+  Output: "Au lieu de renvoyer une seule valeur, summarize() renvoie maintenant la taille moyenne pour CHAQUE paquet de notre ensemble de données."
+
+- Class: script
+  Output: "Allons un peu plus loin. Je viens d'ouvrir pour vous un script R qui contient un appel partiellement construit à summarize(). Suivez les instructions dans les commentaires du script.\n\nQuand vous êtes prêt à passer à autre chose, enregistrez le script et tapez submit(), ou tapez reset() pour remettre le script dans son état d'origine."
+  AnswerTests: script_results_identical('res_paq'); multi_expr_creates_var('res_paq')
+  Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
+  Script: summarize1.R
+
+- Class: cmd_question
+  Output: "Imprimez la table résultante, res_paq, sur la console pour examiner son contenu."
+  CorrectAnswer: res_paq
+  AnswerTests: any_of_exprs('res_paq', 'print(res_paq)')
+  Hint: "Tapez res_paq pour afficher son contenu."
+
+- Class: text
+  Output: "La colonne 'compte', créée avec n(), contient le nombre total de lignes (c'est-à-dire de téléchargements) pour chaque paquet. La colonne 'unique', créée avec n_distinct(ip_id), donne le nombre total de téléchargements uniques pour chaque paquet, mesuré par le nombre d'ip_id distincts. La colonne 'pays', créée avec n_distinct(country), indique le nombre de pays dans lesquels chaque paquet a été téléchargé. Et enfin, la colonne 'octets_moyens', créée avec mean(size), contient la taille moyenne des téléchargements (en octets) pour chaque paquet."
+
+- Class: text
+  Output: "Il est important que vous compreniez comment chaque colonne de res_paq a été créée et ce qu'elle signifie. Maintenant que nous avons résumé les données par paquet individuel, jouons un peu plus avec pour voir ce que nous pouvons apprendre."
+
+- Class: text
+  Output: "Naturellement, nous aimerions savoir quels paquets étaient les plus populaires le jour où ces données ont été recueillies (8 juillet 2014). Commençons par isoler les 1 % de paquets les plus populaires, sur la base du nombre total de téléchargements, mesuré par la colonne 'compte'."
+
+- Class: cmd_question
+  Output: "Nous devons connaître la valeur de 'compte' qui divise les données entre les 1 % de paquets les plus importants et les 99 % les moins importants en fonction du nombre total de téléchargements. En statistiques, cela s'appelle le quantile d'échantillon de 0,99, ou 99 %. Utilisez quantile(res_paq$compte, probs = 0.99) pour déterminer ce nombre."
+  CorrectAnswer: quantile(res_paq$compte, probs = 0.99)
+  AnswerTests: omnitest('quantile(res_paq$compte, probs = 0.99)')
+  Hint: "quantile(res_paq$compte, probs = 0.99) nous donnera le quantile d'échantillon de 0.99, ou 99%, pour la variable 'compte'."
+
+- Class: cmd_question
+  Output: "Maintenant, nous pouvons isoler uniquement les paquets qui ont eu plus de 679 téléchargements totaux. Utilisez filter() pour sélectionner toutes les lignes de res_paq pour lesquelles 'compte' est strictement supérieur (>) à 679. Stockez le résultat dans un nouvel objet appelé comptes_meilleurs."
+  CorrectAnswer: comptes_meilleurs <- filter(res_paq, count > 679)
+  AnswerTests: omnitest('comptes_meilleurs <- filter(res_paq, count > 679)')
+  Hint: "Stockez le résultat de filter(res_paq, compte > 679) dans un nouvel objet appelé comptes_meilleurs."
+
+- Class: cmd_question
+  Output: "Jetons un coup d'oeil aux comptes_meilleurs. Imprimez-le dans la console."
+  CorrectAnswer: comptes_meilleurs
+  AnswerTests: any_of_exprs('comptes_meilleurs', 'print(comptes_meilleurs)')
+  Hint: "Tapez comptes_meilleurs pour voir son contenu."
+
+- Class: text
+  Output: "Il n'y a que 61 paquets dans notre top 1%, nous aimerions donc les voir tous. Comme dplyr ne nous montre que les 10 premières lignes, nous pouvons utiliser la fonction View() pour en voir plus."
+
+- Class: cmd_question
+  Output: "Afficher les 61 lignes avec View(comptes_meilleurs). Notez que le 'V' de View() est en majuscule."
+  CorrectAnswer: View(comptes_meilleurs)
+  AnswerTests: omnitest('View(comptes_meilleurs)')
+  Hint: "Utilisez View(comptes_meilleurs) pour afficher les 61 lignes. Cette méthode peut ne pas fonctionner correctement dans tous les environnements de programmation. Si vous rencontrez des difficultés, nous vous recommandons d'utiliser RStudio."
+
+- Class: cmd_question
+  Output: "arrange() les lignes de comptes_meilleurs en fonction de la colonne 'compte' et affecte le résultat à un nouvel objet appelé comptes_meilleurs_tries. Nous voulons que les paquets ayant le plus grand nombre de téléchargements soient en tête, ce qui signifie que nous voulons que 'compte' soit en ordre décroissant. Si vous avez besoin d'aide, consultez ?arrange et/ou ?desc."
+  CorrectAnswer: comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(count))
+  AnswerTests: omnitest('comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(count))')
+  Hint: "arrange(comptes_meilleurs, desc(compte)) classera les lignes de comptes_meilleurs en fonction des valeurs de la variable 'compte', par ordre décroissant. N'oubliez pas d'affecter le résultat à comptes_meilleurs_tries."
+
+- Class: cmd_question
+  Output: "Utilisez maintenant View() à nouveau pour voir les 61 lignes de comptes_meilleurs_tries."
+  CorrectAnswer: View(comptes_meilleurs_tries)
+  AnswerTests: omnitest('View(comptes_meilleurs_tries)')
+  Hint: "Utilisez View(comptes_meilleurs_tries) pour afficher les 61 lignes des données triées."
+
+- Class: text
+  Output: "Si nous utilisons le nombre total de téléchargements comme mesure de la popularité, alors la sortie ci-dessus nous montre les paquets les plus populaires téléchargés depuis le miroir CRAN de RStudio le 8 juillet 2014. Sans surprise, ggplot2 est en tête du peloton avec 4602 téléchargements, suivi de Rcpp, plyr, rJava, ....."
+
+- Class: text
+  Output: "...Et si vous continuez, vous verrez swirl au numéro 43, avec 820 téléchargements totaux. Génial !"
+
+- Class: text
+  Output: "Nous sommes peut-être plus intéressés par le nombre de téléchargements *uniques* au cours de cette journée particulière. En d'autres termes, si un paquet est téléchargé dix fois en un jour à partir du même ordinateur, nous pouvons souhaiter le compter comme un seul téléchargement. C'est ce que la colonne 'unique' nous dira."
+
+- Class: cmd_question
+  Output: "Comme nous l'avons fait avec 'compte', trouvons le quantile 0,99, ou 99%, pour la variable 'unique' avec quantile(res_paq$unique, probs = 0.99)."
+  CorrectAnswer: quantile(res_paq$unique, probs = 0.99)
+  AnswerTests: omnitest('quantile(res_paq$unique, probs = 0.99)')
+  Hint: "Utilisez quantile(res_paq$unique, probs = 0.99) pour obtenir le quantile de 0.99, ou 99% pour 'unique'."
+
+- Class: cmd_question
+  Output: "Appliquez un filtre() à res_paq pour sélectionner toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à un objet appelé uniques_meilleurs."
+  CorrectAnswer: uniques_meilleurs <- filter(res_paq, unique > 465)
+  AnswerTests: omnitest('uniques_meilleurs <- filter(res_paq, unique > 465)')
+  Hint: "filter(res_paq, unique > 465) sélectionnera toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à uniques_meilleurs."
+
+- Class: cmd_question
+  Output: "Regardons() nos meilleurs candidats !"
+  CorrectAnswer: View(uniques_meilleurs)
+  AnswerTests: omnitest('View(uniques_meilleurs)')
+  Hint: "Tapez View(uniques_meilleurs) pour voir le résultat."
+
+- Class: cmd_question
+  Output: "Maintenant, classez() uniques_meilleurs par la colonne 'unique', par ordre décroissant, pour voir quels paquets ont été téléchargés à partir du plus grand nombre d'adresses IP uniques. Affectez le résultat à uniques_meilleurs_tries."
+  CorrectAnswer: uniques_meilleurs_tries <- arrange(uniques_meilleurs, desc(unique))
+  AnswerTests: omnitest('uniques_meilleurs_tries <- arrange(uniques_meilleurs, desc(unique))')
+  Hint: "arrange(uniques_meilleurs, desc(unique)) classera les lignes de uniques_meilleurs en fonction des valeurs de la variable 'unique', par ordre décroissant. Affectez le résultat à uniques_meilleurs_tries."
+
+- Class: cmd_question
+  Output: "Visualisez() les données triées."
+  CorrectAnswer: View(uniques_meilleurs_tries)
+  AnswerTests: omnitest('View(uniques_meilleurs_tries)')
+  Hint: "View(uniques_meilleurs_tries) affichera les données triées."
+
+- Class: text
+  Output: "Maintenant, Rcpp est en tête, suivi de stringr, digest, plyr, et ggplot2. swirl a gagné quelques places pour devenir le numéro 40, avec 698 téléchargements uniques. Joli !"
+
+- Class: text
+  Output: "Notre dernière mesure de la popularité est le nombre de pays distincts à partir desquels chaque paquet a été téléchargé. Nous allons l'aborder un peu différemment pour vous présenter une méthode appelée \"chaînage\" (ou \"tuyauterie\")."
+
+- Class: text
+  Output: "Le chaînage vous permet d'enchaîner plusieurs appels de fonction d'une manière compacte et lisible, tout en obtenant le résultat souhaité. Pour être plus concret, calculons notre dernière mesure de popularité à partir de zéro, en commençant par nos données d'origine."
+
+- Class: script
+  Output: "J'ai ouvert un script qui contient un code similaire à ce que vous avez vu jusqu'à présent. Ne changez rien. Étudiez-le simplement pendant une minute, assurez-vous de comprendre tout ce qui s'y trouve, puis submit() lorsque vous êtes prêt à passer à autre chose."
+  AnswerTests: script_results_identical('resultat1'); multi_expr_creates_var('resultat1')
+  Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
+  Script: summarize2.R
+
+- Class: text
+  Output: "Il convient de noter que nous avons principalement trié par pays, mais que nous avons utilisé octets_moyens (par ordre croissant) pour départager les ex-aequo. Cela signifie que si deux paquets ont été téléchargés à partir du même nombre de pays, celui dont la taille moyenne de téléchargement est la plus petite est mieux classé."
+
+- Class: text
+  Output: "Nous aimerions obtenir le même résultat que le dernier script, mais éviter de sauvegarder nos résultats intermédiaires. Pour cela, il faut intégrer des appels de fonction les uns dans les autres."
+
+- Class: script
+  Output: "C'est exactement ce que nous avons fait dans ce script. Le résultat est équivalent, mais le code est beaucoup moins lisible et certains des arguments sont éloignés de la fonction à laquelle ils appartiennent. Encore une fois, essayez simplement de comprendre ce qui se passe ici, puis soumettez() lorsque vous êtes prêt à voir une meilleure solution."
+  AnswerTests: script_results_identical('resultat2'); multi_expr_creates_var('resultat2')
+  Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
+  Script: summarize3.R
+
+- Class: script
+  Output: "Dans ce script, nous avons utilisé un opérateur de chaînage spécial, %>%, qui a été introduit à l'origine dans le paquet R magrittr et est maintenant devenu un composant clé de dplyr. Vous pouvez consulter la documentation correspondante avec ?chain. L'avantage de %>% est qu'il nous permet d'enchaîner les appels de fonction de manière linéaire. Le code situé à droite de %>% opère sur le résultat du code situé à gauche de %>%.\n\nEncore une fois, essayez de comprendre le code, puis tapez submit() pour continuer."
+  AnswerTests: script_results_identical('resultat3'); multi_expr_creates_var('resultat3')
+  Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
+  Script: summarize4.R
+
+- Class: text
+  Output: "Ainsi, les résultats des trois derniers scripts sont tous identiques. Mais, le troisième script offre une alternative pratique et concise à la méthode plus traditionnelle que nous avons adoptée précédemment, qui consiste à enregistrer les résultats au fur et à mesure."
+
+- Class: cmd_question
+  Output: "Une fois encore, visualisons() les données complètes, qui ont été stockées dans resultat3."
+  CorrectAnswer: View(resultat3)
+  AnswerTests: omnitest('View(resultat3)')
+  Hint: "View(resultat3) affichera les données complètes, au lieu des 10 premières lignes seulement."
+
+- Class: text
+  Output: "Il semble que Rcpp soit en tête avec des téléchargements provenant de 84 pays différents, suivi de digest, stringr, plyr et ggplot2. swirl a de nouveau fait un bond dans le classement, cette fois au 27e rang."
+
+- Class: text
+  Output: "Pour mieux faire passer le message, examinons quelques autres exemples d'enchaînement."
+
+- Class: script
+  Output: "Construisons une chaîne de commandes dplyr une étape à la fois, en commençant par le script que je viens d'ouvrir pour vous."
+  AnswerTests: script_vals_identical()
+  Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
+  Script: chain1.R
+
+- Class: script
+  Output: "Ajoutons à la chaîne."
+  AnswerTests: script_vals_identical()
+  Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
+  Script: chain2.R
+
+- Class: script
+  Output: "Un peu plus maintenant."
+  AnswerTests: script_vals_identical()
+  Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
+  Script: chain3.R
+
+- Class: script
+  Output: "Et le terminer."
+  AnswerTests: script_vals_identical()
+  Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
+  Script: chain4.R
+
+- Class: text
+  Output: "Dans cette leçon, vous avez appris le regroupement et le chaînage à l'aide de dplyr. Vous avez combiné certaines des choses que vous avez apprises dans la leçon précédente avec ces idées plus avancées pour produire un code concis, lisible et très efficace. Bienvenue dans le monde merveilleux de dplyr !"
+
