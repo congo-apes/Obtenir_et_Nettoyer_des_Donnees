@@ -125,8 +125,8 @@
 
 - Class: cmd_question
   Output: "arrange() les lignes de comptes_meilleurs en fonction de la colonne 'compte' et affecte le résultat à un nouvel objet appelé comptes_meilleurs_tries. Nous voulons que les paquets ayant le plus grand nombre de téléchargements soient en tête, ce qui signifie que nous voulons que 'compte' soit en ordre décroissant. Si vous avez besoin d'aide, consultez ?arrange et/ou ?desc."
-  CorrectAnswer: comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(count))
-  AnswerTests: omnitest('comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(count))')
+  CorrectAnswer: comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(compte))
+  AnswerTests: omnitest('comptes_meilleurs_tries <- arrange(comptes_meilleurs, desc(compte))')
   Hint: "arrange(comptes_meilleurs, desc(compte)) classera les lignes de comptes_meilleurs en fonction des valeurs de la variable 'compte', par ordre décroissant. N'oubliez pas d'affecter le résultat à comptes_meilleurs_tries."
 
 - Class: cmd_question
