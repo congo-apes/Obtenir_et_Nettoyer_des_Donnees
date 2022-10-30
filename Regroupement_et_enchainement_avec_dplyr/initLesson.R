@@ -5,8 +5,8 @@
 }
 
 .chemin_csv <- file.path(.get_course_path(),
-                      'Getting_and_Cleaning_Data',
-                      'Grouping_and_Chaining_with_dplyr',
+                      'Obtenir_et_Nettoyer_des_Donnees',
+                      'Regroupement_et_enchainement_avec_dplyr',
                       '2014-07-08.csv')
 mon_df <- read.csv(.chemin_csv, as.is = TRUE)
 
