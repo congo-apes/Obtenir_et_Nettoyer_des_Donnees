@@ -49,7 +49,7 @@
   Hint: "Utilisez ?group_by pour faire apparaître la documentation."
 
 - Class: cmd_question
-  Output: "Regroupez cran par la variable paquet et stockez le résultat dans un nouvel objet appelé par_paquet."
+  Output: "Regroupez cran par la variable \"package\" et stockez le résultat dans un nouvel objet appelé par_paquet."
   CorrectAnswer: par_paquet <- group_by(cran, package)
   AnswerTests: omnitest('par_paquet <- group_by(cran, package)')
   Hint: "Stockez le résultat de group_by(cran, package) dans un nouvel objet appelé par_paquet."
@@ -77,7 +77,7 @@
 
 - Class: script
   Output: "Allons un peu plus loin. Je viens d'ouvrir pour vous un script R qui contient un appel partiellement construit à summarize(). Suivez les instructions dans les commentaires du script.\n\nQuand vous êtes prêt à passer à autre chose, enregistrez le script et tapez submit(), ou tapez reset() pour remettre le script dans son état d'origine."
-  AnswerTests: script_results_identical('res_paq'); multi_expr_creates_var('res_paq')
+  AnswerTests: script_vals_identical()
   Hint: "Suivez très attentivement les indications des commentaires du script. Si R vous a donné une erreur ci-dessus, essayez de comprendre ce qu'il vous dit. Si vous êtes bloqué, tapez reset() pour commencer avec un nouveau script, puis enregistrez le script et tapez submit() lorsque vous êtes prêt."
   Script: summarize1.R
 
@@ -185,7 +185,7 @@
 
 - Class: script
   Output: "J'ai ouvert un script qui contient un code similaire à ce que vous avez vu jusqu'à présent. Ne changez rien. Étudiez-le simplement pendant une minute, assurez-vous de comprendre tout ce qui s'y trouve, puis submit() lorsque vous êtes prêt à passer à autre chose."
-  AnswerTests: script_results_identical('resultat1'); multi_expr_creates_var('resultat1')
+  AnswerTests: script_vals_identical()
   Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
   Script: summarize2.R
 
@@ -197,13 +197,13 @@
 
 - Class: script
   Output: "C'est exactement ce que nous avons fait dans ce script. Le résultat est équivalent, mais le code est beaucoup moins lisible et certains des arguments sont éloignés de la fonction à laquelle ils appartiennent. Encore une fois, essayez simplement de comprendre ce qui se passe ici, puis soumettez() lorsque vous êtes prêt à voir une meilleure solution."
-  AnswerTests: script_results_identical('resultat2'); multi_expr_creates_var('resultat2')
+  AnswerTests: script_vals_identical()
   Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
   Script: summarize3.R
 
 - Class: script
   Output: "Dans ce script, nous avons utilisé un opérateur de chaînage spécial, %>%, qui a été introduit à l'origine dans le paquet R magrittr et est maintenant devenu un composant clé de dplyr. Vous pouvez consulter la documentation correspondante avec ?chain. L'avantage de %>% est qu'il nous permet d'enchaîner les appels de fonction de manière linéaire. Le code situé à droite de %>% opère sur le résultat du code situé à gauche de %>%.\n\nEncore une fois, essayez de comprendre le code, puis tapez submit() pour continuer."
-  AnswerTests: script_results_identical('resultat3'); multi_expr_creates_var('resultat3')
+  AnswerTests: script_vals_identical()
   Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
   Script: summarize4.R
 
