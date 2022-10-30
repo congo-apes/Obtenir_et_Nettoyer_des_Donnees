@@ -104,8 +104,8 @@
 
 - Class: cmd_question
   Output: "Maintenant, nous pouvons isoler uniquement les paquets qui ont eu plus de 679 téléchargements totaux. Utilisez filter() pour sélectionner toutes les lignes de res_paq pour lesquelles 'compte' est strictement supérieur (>) à 679. Stockez le résultat dans un nouvel objet appelé comptes_meilleurs."
-  CorrectAnswer: comptes_meilleurs <- filter(res_paq, count > 679)
-  AnswerTests: omnitest('comptes_meilleurs <- filter(res_paq, count > 679)')
+  CorrectAnswer: comptes_meilleurs <- filter(res_paq, compte > 679)
+  AnswerTests: omnitest('comptes_meilleurs <- filter(res_paq, compte > 679)')
   Hint: "Stockez le résultat de filter(res_paq, compte > 679) dans un nouvel objet appelé comptes_meilleurs."
 
 - Class: cmd_question
