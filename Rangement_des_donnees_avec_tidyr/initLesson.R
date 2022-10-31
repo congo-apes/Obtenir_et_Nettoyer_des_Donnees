@@ -5,7 +5,7 @@ library(dplyr)
 
 set.seed(1234)
 etudiants <- data.frame(
-  cours = LETTERS[1:.ng],
+  note = LETTERS[1:.ng],
   male = sample(0:.gmax, .ng, replace = TRUE),
   femelle = sample(0:.gmax, .ng, replace = TRUE)
 )
@@ -36,12 +36,12 @@ etudiants3 <- read.csv(.path2s3, na.strings = "", stringsAsFactors = FALSE)
 etudiants4 <- read.csv(.path2s4, stringsAsFactors = FALSE)
 
 reussir <- etudiants4 %>%
-  select(nom, cours, final) %>%
+  select(nom, classe, final) %>%
   filter(final == "A" | final == "B")
 echoue <- etudiants4 %>%
-  select(nom, cours, final) %>%
+  select(nom, classe, final) %>%
   filter(final == "C" | final == "D" | final == "E")
 
 .path2sat <- file.path(.lesson_path, 'sat13.csv')
-sat <- tbl_df(read.csv(.path2sat, stringsAsFactors = FALSE))
+sat <- as_tibble(read.csv(.path2sat, stringsAsFactors = FALSE))
 

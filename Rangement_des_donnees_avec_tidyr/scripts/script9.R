@@ -13,7 +13,7 @@
 
 sat %>%
   select(-contains("total")) %>%
-  gather(part_sexe, compte, -gamme_de_score) %>%
+  gather(part_sexe, compte, -gamme_de_scores) %>%
   separate(part_sexe, c("part", "sexe")) %>%
   # <Votre appel à group_by()> %>%
   mutate(###,

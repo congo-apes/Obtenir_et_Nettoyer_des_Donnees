@@ -7,7 +7,7 @@
 # contains(), que vous trouverez détaillée dans la section "Special 
 # Functions" de ?select.
 # 
-# 2. gather() toutes les colonnes SAUF gamme_de_score, en utilisant 
+# 2. gather() toutes les colonnes SAUF gamme_de_scores, en utilisant 
 # key = part_sexe et value = compte.
 # 
 # 3. separate() part_sex en deux variables (colonnes) distinctes, 

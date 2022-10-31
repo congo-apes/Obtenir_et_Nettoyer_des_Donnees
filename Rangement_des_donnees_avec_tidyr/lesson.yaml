@@ -25,7 +25,7 @@
   Output: "Les données tidy sont formatées d'une manière standard qui facilite l'exploration et l'analyse et fonctionnent de manière transparente avec d'autres outils tidy data. Plus précisément, les données tidy satisfont à trois conditions :\n\n1) Chaque variable forme une colonne\n\n2) Chaque observation forme une ligne\n\n\n3) Chaque type d'unité d'observation forme un tableau"
 
 - Class: mult_question
-  Output: "Tout ensemble de données qui ne remplit pas ces conditions est considéré comme une donnée "désordonnée". Par conséquent, tous les éléments suivants sont des caractéristiques des données désordonnées, SAUF..."
+  Output: "Tout ensemble de données qui ne remplit pas ces conditions est considéré comme une donnée \"désordonnée\". Par conséquent, tous les éléments suivants sont des caractéristiques des données désordonnées, SAUF..."
   AnswerChoices: Chaque colonne contient une variable différente; Les en-têtes de colonne sont des valeurs, pas des noms de variable; Plusieurs variables sont stockées dans une seule colonne; Les variables sont stockées à la fois en lignes et en colonnes; Plusieurs types d'unités d'observation sont stockés dans la même table; Une seule unité d'observation est stockée dans plusieurs tables
   CorrectAnswer: Chaque colonne contient une variable différente
   AnswerTests: omnitest(correctVal= 'Chaque colonne contient une variable différente')
@@ -77,8 +77,8 @@
   Output: "Cependant, il comporte également plusieurs variables stockées dans chaque colonne (sexe et classe), ce qui est un autre symptôme courant de données désordonnées. Le rangement de cet ensemble de données sera un processus en deux étapes."
 
 - Class: cmd_question
-  Output: "Commençons par utiliser gather() pour empiler les colonnes de etudiants2, comme nous venons de le faire avec students. Cette fois, nommez la colonne "key" sexe_classe et la colonne "value" compte. Enregistrez le résultat dans une nouvelle variable appelée res. Consultez à nouveau ?gather si vous avez besoin d'aide."
-  CorrectAnswer: res <- gather(etudiants2 sexe_classe, compte, -note)
+  Output: "Commençons par utiliser gather() pour empiler les colonnes de etudiants2, comme nous venons de le faire avec students. Cette fois, nommez la colonne \"key\" sexe_classe et la colonne \"value\" compte. Enregistrez le résultat dans une nouvelle variable appelée res. Consultez à nouveau ?gather si vous avez besoin d'aide."
+  CorrectAnswer: res <- gather(etudiants2, sexe_classe, compte, -note)
   AnswerTests: match_call('res <- gather(etudiants2, sexe_classe, compte, -note)')
   Hint: "Call gather() with the following arguments (in order): etudiants2, sexe_classe, compte, -note). Store the result in a variable called res."
 
@@ -215,16 +215,16 @@
   Output: The name of each dataset actually represents the value of a new variable that we will call 'status'. Before joining the two tables together, we'll add a new column to each containing this information so that it's not lost when we put everything together.
 
 - Class: cmd_question
-  Output: "Utilisez la fonction mutate() de dplyr pour ajouter une nouvelle colonne à la table reussir. La colonne doit s'appeler status et la valeur, "reussir" (une chaîne de caractères), doit être la même pour tous les étudiants. Écrasez la version actuelle de passed avec la nouvelle."
+  Output: "Utilisez la fonction mutate() de dplyr pour ajouter une nouvelle colonne à la table reussir. La colonne doit s'appeler status et la valeur, \"reussir\" (une chaîne de caractères), doit être la même pour tous les étudiants. Écrasez la version actuelle de passed avec la nouvelle."
   CorrectAnswer: reussir <- reussir %>% mutate(status = "reussir")
   AnswerTests: any_of_exprs('reussir <- reussir %>% mutate(status = "reussir")', 'reussir <- mutate(reussir, status = "reussir")')
-  Hint: "reussir <- reussir %>% mutate(status = "reussir") fera l'affaire."
+  Hint: "reussir <- reussir %>% mutate(status = \"reussir\") fera l'affaire."
 
 - Class: cmd_question
-  Output: "Maintenant, faites la même chose pour la table echoue, sauf que la colonne statut doit avoir la valeur "echoue" pour tous les étudiants."
+  Output: "Maintenant, faites la même chose pour la table echoue, sauf que la colonne statut doit avoir la valeur \"echoue\" pour tous les étudiants."
   CorrectAnswer: echoue <- echoue %>% mutate(status = "echoue")
   AnswerTests: any_of_exprs('echoue <- echoue %>% mutate(status = "echoue")', 'echoue <- mutate(echoue, status = "echoue")')
-  Hint: "echoue <- echoue %>% mutate(status = "echoue") est ce que vous recherchez."
+  Hint: "echoue <- echoue %>% mutate(status = \"echoue\") est ce que vous recherchez."
 
 - Class: cmd_question
   Output: "Maintenant, passez comme arguments les tables reussir et echoue (dans l'ordre) à la fonction dplyr bind_rows(), qui les réunira en une seule unité. Consultez ?bind_rows si vous avez besoin d'aide.\n\nNote : bind_rows() n'est disponible que dans dplyr 0.4.0 ou une version ultérieure. Si vous disposez d'une version antérieure de dplyr, veuillez quitter la leçon, mettre à jour dplyr, puis reprendre la leçon là où vous l'avez laissée. Si vous n'êtes pas sûr de la version de dplyr que vous avez, tapez packageVersion('dplyr')."
