@@ -10,7 +10,7 @@
   Output: "Dans cette leçon, vous apprendrez à manipuler des données à l'aide de dplyr. dplyr est un paquet R rapide et puissant écrit par Hadley Wickham et Romain Francois qui fournit une grammaire cohérente et concise pour manipuler des données tabulaires."
 
 - Class: text
-  Output: "Un aspect unique de dplyr est que le même ensemble d'outils vous permet de travailler avec des données tabulaires provenant de diverses sources, notamment des cadres de données, des tableaux de données, des bases de données et des tableaux multidimensionnels. Dans cette leçon, nous nous concentrerons sur les cadres de données, mais tout ce que vous apprendrez s'appliquera également aux autres formats."
+  Output: "Un aspect unique de dplyr est que le même ensemble d'outils vous permet de travailler avec des données tabulaires provenant de diverses sources, notamment des trames de données, des tableaux de données, des bases de données et des tableaux multidimensionnels. Dans cette leçon, nous nous concentrerons sur les trames de données, mais tout ce que vous apprendrez s'appliquera également aux autres formats."
 
 - Class: text
   Output: "Comme vous le savez peut-être, CRAN est un réseau de serveurs ftp et web à travers le monde qui stocke des versions identiques et à jour du code et de la documentation pour R (http://cran.rstudio.com/). RStudio maintient l'un de ces \"miroirs CRAN\" et ils mettent généreusement leurs journaux de téléchargement à la disposition du public (http://cran-logs.rstudio.com/). Nous allons travailler avec le journal du 8 juillet 2014, qui contient des informations sur environ 225 000 téléchargements de paquets."
@@ -49,25 +49,25 @@
   Output: "Si votre version de dplyr n'est pas au moins 0.4.0, vous devez alors appuyer sur la touche Echap maintenant, réinstaller dplyr, puis reprendre cette leçon là où vous l'avez laissée."
 
 - Class: cmd_question
-  Output: "La première étape du travail avec des données dans dplyr consiste à charger les données dans ce que les auteurs du paquet appellent un \"cadre de données tbl\" ou \"as_tibble\". Utilisez le code suivant pour créer un nouveau as_tibble appelé cran : \n\ncran <- as_tibble(mondf)."
+  Output: "La première étape du travail avec des données dans dplyr consiste à charger les données dans ce que les auteurs du paquet appellent un \"trame de données tbl\" ou \"as_tibble\". Utilisez le code suivant pour créer un nouveau as_tibble appelé cran : \n\ncran <- as_tibble(mondf)."
   CorrectAnswer: cran <- as_tibble(mondf)
   AnswerTests: omnitest(correctExpr='cran <- as_tibble(mondf)')
   Hint: "Tapez cran <- as_tibble(mondf) pour créer un nouveau as_tibble appelé cran."
 
 - Class: cmd_question
-  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le cadre de données original de votre espace de travail avec rm(\"mondf\")."
+  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le trame de données original de votre espace de travail avec rm(\"mondf\")."
   CorrectAnswer: rm("mondf")
   AnswerTests: omnitest(correctExpr='rm("mondf")')
-  Hint: "Utilisez rm(\"mondf\") pour supprimer le cadre de données original de votre espace de travail."
+  Hint: "Utilisez rm(\"mondf\") pour supprimer le trame de données original de votre espace de travail."
 
 - Class: cmd_question
-  Output: "D'après ?as_tibble, \"Le principal avantage d'utiliser un as_tibble par rapport à un cadre de données ordinaire est l'impression.\" Voyons ce que cela signifie. Tapez cran pour imprimer notre as_tibble à la console."
+  Output: "D'après ?as_tibble, \"Le principal avantage d'utiliser un as_tibble par rapport à un trame de données ordinaire est l'impression.\" Voyons ce que cela signifie. Tapez cran pour imprimer notre as_tibble à la console."
   CorrectAnswer: cran
   AnswerTests: omnitest(correctExpr='cran')
   Hint: "Tapez cran pour imprimer notre as_tibble à la console."
 
 - Class: text
-  Output: "Cette sortie est beaucoup plus informative et compacte que celle que nous obtiendrions si nous imprimions le cadre de données original (mondf) sur la console."
+  Output: "Cette sortie est beaucoup plus informative et compacte que celle que nous obtiendrions si nous imprimions le trame de données original (mondf) sur la console."
 
 - Class: text
   Output: "Tout d'abord, on nous montre la classe et les dimensions de l'ensemble de données. Juste en dessous, nous obtenons un aperçu des données. Au lieu d'essayer d'imprimer l'ensemble des données, dplyr ne nous montre que les 10 premières lignes de données et seulement le nombre de colonnes qui s'adaptent parfaitement à notre console. En bas, nous voyons les noms et les classes de toutes les variables qui ne rentrent pas dans notre écran."
@@ -91,7 +91,7 @@
   Hint: "Tapez select(cran, ip_id, package, country) pour sélectionner uniquement les variables ip_id, package, et country dans l'ensemble de données cran."
 
 - Class: text
-  Output: "La première chose à remarquer est que nous n'avons pas à taper cran$ip_id, cran$package et cran$country, comme nous le ferions normalement en nous référant aux colonnes d'un cadre de données. La fonction select() sait que nous faisons référence à des colonnes de l'ensemble de données cran."
+  Output: "La première chose à remarquer est que nous n'avons pas à taper cran$ip_id, cran$package et cran$country, comme nous le ferions normalement en nous référant aux colonnes d'un trame de données. La fonction select() sait que nous faisons référence à des colonnes de l'ensemble de données cran."
 
 - Class: text
   Output: "Notez également que les colonnes nous sont retournées dans l'ordre que nous avons spécifié, même si ip_id est la colonne la plus à droite dans l'ensemble de données original."

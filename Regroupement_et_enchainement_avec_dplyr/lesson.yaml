@@ -25,7 +25,7 @@
   Hint: "Utilisez library(dplyr) pour charger le paquet dplyr."
 
 - Class: cmd_question
-  Output: "J'ai mis l'ensemble de données à votre disposition dans un cadre de données appelé mon_df. Placez-le dans un 'cadre de données tbl' en utilisant la fonction as_tibble() et stockez le résultat dans un objet appelé cran. Si vous n'êtes pas sûr de ce dont je parle, vous devriez commencer par la leçon précédente. Sinon, c'est en forgeant qu'on devient forgeron !"
+  Output: "J'ai mis l'ensemble de données à votre disposition dans un trame de données appelé mon_df. Placez-le dans un 'trame de données tbl' en utilisant la fonction as_tibble() et stockez le résultat dans un objet appelé cran. Si vous n'êtes pas sûr de ce dont je parle, vous devriez commencer par la leçon précédente. Sinon, c'est en forgeant qu'on devient forgeron !"
   CorrectAnswer: cran <- as_tibble(mon_df)
   AnswerTests: omnitest(correctExpr='cran <- as_tibble(mon_df)')
   Hint: "Tapez cran <- as_tibble(mon_df) pour stocker les données dans un nouvel as_tibble appelé cran."
@@ -34,7 +34,7 @@
   Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le dataframe original de votre espace de travail avec rm(\"mon_df\")."
   CorrectAnswer: rm("mon_df")
   AnswerTests: omnitest(correctExpr='rm("mon_df")')
-  Hint: "Utilisez rm(\"mon_df\") pour supprimer le cadre de données original de votre espace de travail."
+  Hint: "Utilisez rm(\"mon_df\") pour supprimer le trame de données original de votre espace de travail."
 
 - Class: cmd_question
   Output: "Imprimez cran à la console."
