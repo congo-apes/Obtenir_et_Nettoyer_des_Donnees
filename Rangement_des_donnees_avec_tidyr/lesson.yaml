@@ -1,0 +1,264 @@
+- Class: meta
+  Course: Obtenir et Nettoyer des Données
+  Lesson: Rangement des données avec tidyr
+  Author: Nick Carchedi, translated by GTAP/MDK
+  Type: Standard
+  Organization: JHU Biostat, translated by GTAP/MDK
+  Version: 2.2.15
+
+- Class: text
+  Output: "Dans cette leçon, vous apprendrez à mettre de l'ordre dans vos données avec le paquet tidyr."
+
+- Class: text
+  Output: "Certaines parties de cette leçon nécessiteront l'utilisation de dplyr. Si vous n'avez pas une connaissance de base de dplyr, vous devriez quitter cette leçon et commencer par les leçons sur dplyr qui se trouvent plus tôt dans le cours."
+
+- Class: cmd_question
+  Output: "tidyr a été automatiquement installé (si nécessaire) et chargé lorsque vous avez commencé cette leçon. Pour en prendre l'habitude, (re)chargez le paquetage avec library(tidyr)."
+  CorrectAnswer: library(tidyr)
+  AnswerTests: omnitest('library(tidyr)')
+  Hint: "Tapez library(tidyr) pour (re)charger le paquetage tidyr."
+
+- Class: text
+  Output: "L'auteur de tidyr, Hadley Wickham, expose sa philosophie des données ordonnées dans son article intitulé \"Tidy Data\" :\n\n http://vita.had.co.nz/papers/tidy-data.pdf. Cet article devrait être lu par tous ceux qui travaillent avec des données, mais il n'est pas nécessaire pour suivre cette leçon."
+
+- Class: text
+  Output: "Les données tidy sont formatées d'une manière standard qui facilite l'exploration et l'analyse et fonctionnent de manière transparente avec d'autres outils tidy data. Plus précisément, les données tidy satisfont à trois conditions :\n\n1) Chaque variable forme une colonne\n\n2) Chaque observation forme une ligne\n\n\n3) Chaque type d'unité d'observation forme un tableau"
+
+- Class: mult_question
+  Output: "Tout ensemble de données qui ne remplit pas ces conditions est considéré comme une donnée "désordonnée". Par conséquent, tous les éléments suivants sont des caractéristiques des données désordonnées, SAUF..."
+  AnswerChoices: Chaque colonne contient une variable différente; Les en-têtes de colonne sont des valeurs, pas des noms de variable; Plusieurs variables sont stockées dans une seule colonne; Les variables sont stockées à la fois en lignes et en colonnes; Plusieurs types d'unités d'observation sont stockés dans la même table; Une seule unité d'observation est stockée dans plusieurs tables
+  CorrectAnswer: Chaque colonne contient une variable différente
+  AnswerTests: omnitest(correctVal= 'Chaque colonne contient une variable différente')
+  Hint: Faites défiler la page pour revoir les trois caractéristiques des données ordonnées. Tout ensemble de données qui enfreint au moins une de ces caractéristiques est considéré comme désordonné. Par conséquent, tous les éléments suivants sont des caractéristiques des données désordonnées, SAUF...
+
+- Class: text
+  Output: Les réponses incorrectes à la question précédente sont les symptômes les plus courants de données désordonnées. Voyons un exemple simple de chacun de ces cinq cas, puis mettons de l'ordre dans des données réelles.
+
+- Class: cmd_question
+  Output: "Le premier problème est lorsque vous avez des en-têtes de colonne qui sont des valeurs, et non des noms de variables. J'ai créé un ensemble de données simple appelé \"etudiants\" qui illustre ce scénario. Tapez etudiants pour y jeter un coup d'oeil."
+  CorrectAnswer: etudiants
+  AnswerTests: prints_var('etudiants')
+  Hint: "Tapez etudiants pour visualiser les données."
+
+- Class: text
+  Output: "La première colonne représente chacune des cinq notes possibles que les étudiants pourraient recevoir pour une classe particulière. Les deuxième et troisième colonnes donnent le nombre d'étudiants masculins et féminins, respectivement, qui ont reçu chaque note."
+
+- Class: text
+  Output: "Cet ensemble de données comporte en fait trois variables : grade, sexe et nombre. La première variable, le grade, est déjà une colonne, elle doit donc rester telle quelle. La deuxième variable, le sexe, est saisie par les deuxième et troisième titres de colonne. La troisième variable, le nombre, est le nombre d'étudiants pour chaque combinaison d'année et de sexe."
+
+- Class: cmd_question
+  Output: "Pour ordonner les données des étudiants, nous devons avoir une colonne pour chacune de ces trois variables. Pour ce faire, nous allons utiliser la fonction gather() de tidyr. Consultez la documentation de cette fonction avec ?gather."
+  CorrectAnswer: ?gather
+  AnswerTests: gets_help('gather')
+  Hint: "Utilisez ?gather pour faire apparaître la documentation."
+
+- Class: cmd_question
+  Output: "En utilisant le fichier d'aide comme guide, appelez gather() avec les arguments suivants (dans l'ordre) : etudiants, sexe, compte, -note. Notez le signe moins avant note, qui indique que nous voulons rassembler toutes les colonnes SAUF le note."
+  CorrectAnswer: gather(etudiants, sexe, compte, -note)
+  AnswerTests: match_call('gather(etudiants, sexe, compte, -note)')
+  Hint: "gather(etudiants, sexe, compte, -note) va correctement ordonner les données sur les étudiants, de sorte qu'elles comportent trois colonnes : note, sexe et compte."
+
+- Class: text
+  Output: "Chaque ligne des données représente maintenant exactement une observation, caractérisée par une combinaison unique des variables grade et sexe. Chacune de nos variables (note, sexe, et compte) occupe exactement une colonne. Ce sont des données bien ordonnées !"
+
+- Class: text
+  Output: "Il est important de comprendre ce que signifie chaque argument de gather(). L'argument data, students, donne le nom de l'ensemble de données original. Les arguments key et value -- sexe et compte, respectivement -- donnent les noms des colonnes pour notre ensemble de données ordonné. L'argument final, -note, indique que nous voulons rassembler toutes les colonnes SAUF la colonne note (puisque la note est déjà une variable de colonne appropriée)."
+
+- Class: cmd_question
+  Output: "Le deuxième cas de données désordonnées que nous allons examiner est celui où plusieurs variables sont stockées dans une seule colonne. Tapez etudiants2 pour voir un exemple de ceci."
+  CorrectAnswer: etudiants2
+  AnswerTests: prints_var('etudiants2')
+  Hint: "Tapez etudiants2 pour afficher les données."
+
+- Class: text
+  Output: "Cet ensemble de données est similaire au premier, sauf qu'il y a maintenant deux classes distinctes, 1 et 2, et que nous avons des comptes totaux pour chaque sexe au sein de chaque classe. etudiants2 souffre du même problème de données désordonnées d'avoir des en-têtes de colonnes qui sont des valeurs (male_1, femelle_1, etc.) et non des noms de variables (sexe, classe et compte)."
+
+- Class: text
+  Output: "Cependant, il comporte également plusieurs variables stockées dans chaque colonne (sexe et classe), ce qui est un autre symptôme courant de données désordonnées. Le rangement de cet ensemble de données sera un processus en deux étapes."
+
+- Class: cmd_question
+  Output: "Commençons par utiliser gather() pour empiler les colonnes de etudiants2, comme nous venons de le faire avec students. Cette fois, nommez la colonne "key" sexe_classe et la colonne "value" compte. Enregistrez le résultat dans une nouvelle variable appelée res. Consultez à nouveau ?gather si vous avez besoin d'aide."
+  CorrectAnswer: res <- gather(etudiants2 sexe_classe, compte, -note)
+  AnswerTests: match_call('res <- gather(etudiants2, sexe_classe, compte, -note)')
+  Hint: "Call gather() with the following arguments (in order): etudiants2, sexe_classe, compte, -note). Store the result in a variable called res."
+
+- Class: cmd_question
+  Output: "Imprimez res à la console pour voir ce que nous avons accompli."
+  CorrectAnswer: res
+  AnswerTests: prints_var('res')
+  Hint: "Tapez res pour afficher son contenu."
+
+- Class: cmd_question
+  Output: "Cela nous a permis de faire la moitié du chemin vers des données ordonnées, mais nous avons toujours deux variables différentes, le sexe et la classe, stockées ensemble dans la colonne sexe_classe. tidyr offre une fonction pratique separate() dans le but de séparer une colonne en plusieurs colonnes. Consultez maintenant le fichier d'aide de separate()."
+  CorrectAnswer: ?separate
+  AnswerTests: gets_help('separate')
+  Hint: "Tapez ?separate pour faire apparaître le fichier d'aide."
+
+- Class: cmd_question
+  Output: "Appelez separate() sur res pour diviser la colonne sexe_classe en sexe et classe. Vous devez seulement spécifier les trois premiers arguments : data = res, col = sexe_classe, into = c(\"sexe\", \"classe\"). Vous n'avez pas à fournir les noms des arguments tant qu'ils sont dans le bon ordre."
+  CorrectAnswer: separate(res, sexe_classe, c("sexe", "classe"))
+  AnswerTests: match_call('separate(res, sexe_classe, c("sexe", "classe"))')
+  Hint: "separate(res, sexe_classe, c(\"sexe\", \"classe\")) va diviser la colonne sexe_classe en sexe et classe."
+
+- Class: text
+  Output: "Comme par hasard, separate() a réussi à trouver tout seul comment séparer la colonne sexe_classe. À moins que vous ne demandiez le contraire avec l'argument 'sep', il sépare les valeurs non alphanumériques. En d'autres termes, elle suppose que les valeurs sont séparées par quelque chose d'autre qu'une lettre ou un chiffre (dans ce cas, un trait de soulignement.)"
+
+- Class: text
+  Output: "Le rangement des etudiants2 a nécessité à la fois gather() et separate(), ce qui nous a amené à enregistrer un résultat intermédiaire (res). Toutefois, tout comme avec dplyr, vous pouvez utiliser l'opérateur %>% pour enchaîner plusieurs appels de fonction."
+
+- Class: script
+  Output: "J'ai ouvert un script R pour que vous puissiez faire un essai. Suivez les instructions du script, puis enregistrez le script et tapez submit() à l'invite lorsque vous êtes prêt. Si vous êtes bloqué et souhaitez recommencer, vous pouvez taper reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script1.R
+
+- Class: cmd_question
+  Output: "Un troisième symptôme de données désordonnées est lorsque les variables sont stockées à la fois dans les lignes et les colonnes. etudiants3 en fournit un exemple. Imprimez etudiants3 à la console."
+  CorrectAnswer: etudiants3
+  AnswerTests: prints_var('etudiants3')
+  Hint: "Tapez etudiants3 pour voir son contenu."
+
+- Class: text
+  Output: "Dans le cas de etudiants3, nous disposons des notes des examens de miparcours et finaux pour cinq étudiants, chacun étant inscrit à exactement deux des cinq classes possibles."
+
+- Class: text
+  Output: "La première variable, name, est déjà une colonne et doit rester telle quelle. Les en-têtes des cinq dernières colonnes, classe1 à classe5, sont toutes des valeurs différentes de ce qui devrait être une variable de classe. Les valeurs de la colonne test, midterm et final, devraient chacune être une variable propre contenant les notes respectives de chaque étudiant."
+
+- Class: script
+  Output: "Cela nécessitera plusieurs étapes, que nous construirons progressivement à l'aide de %>%. Modifiez le script R, enregistrez-le, puis tapez submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script2.R
+
+- Class: cmd_question
+  Output: "L'étape suivante nécessitera l'utilisation de la fonction spread(). Consultez la documentation de la fonction spread() maintenant."
+  CorrectAnswer: ?spread
+  AnswerTests: gets_help('spread')
+  Hint: "Tapez ?spread pour faire apparaître la documentation."
+
+- Class: script
+  Output: "Modifiez le script R, puis enregistrez-le et tapez submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script3.R
+
+- Class: cmd_question
+  Output: "readr est nécessaire pour certaines manipulations de données, comme parse_number(), qui sera utilisé dans la prochaine question. (Re)chargeons le paquetage avec library(readr)."
+  CorrectAnswer: library(readr)
+  AnswerTests: omnitest('library(readr)')
+  Hint: "Tapez library(readr) pour (re)charger le paquet readr."
+
+- Class: cmd_question
+  Output: "Enfin, nous voulons que les valeurs de la colonne classe soient simplement 1, 2, ..., 5 et non classe1, classe2, ..., classe5. Nous pouvons utiliser la fonction parse_number() de readr pour accomplir ceci. Pour voir comment cela fonctionne, essayez parse_number(\"classe5\")."
+  CorrectAnswer: parse_number("classe5")
+  AnswerTests: omnitest('parse_number("classe5")')
+  Hint: "Tapez parse_number(\"classe5\") pour voir comment cela fonctionne."
+
+- Class: script
+  Output: "Maintenant, la dernière étape. Modifiez le script R, puis enregistrez-le et tapez submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script4.R
+
+- Class: cmd_question
+  Output: "Le quatrième problème de données désordonnées que nous allons examiner se produit lorsque plusieurs unités d'observation sont stockées dans la même table. etudiants4 en présente un exemple. Jetez maintenant un coup d'œil aux données."
+  CorrectAnswer: etudiants4
+  AnswerTests: prints_var('etudiants4')
+  Hint: "Tapez etudiants4 pour voir son contenu."
+
+- Class: text
+  Output: "etudiants4 est presque identique à notre version ordonnée de etudiants3. La seule différence est que etudiants4 fournit un identifiant unique pour chaque étudiant, ainsi que son sexe (M = homme ; F = femme)."
+
+- Class: text
+  Output: "À première vue, il ne semble pas y avoir beaucoup de problèmes avec les etudiants4. Toutes les colonnes sont des variables et toutes les lignes sont des observations. Cependant, remarquez que chaque id, nom et sexe est répété deux fois, ce qui semble assez redondant. C'est un indice que nos données contiennent plusieurs unités d'observation dans une seule table."
+
+- Class: script
+  Output: "Notre solution consistera à décomposer etudiants4 en deux tables distinctes : l'une contenant les informations de base sur l'étudiant (id, nom et sexe) et l'autre contenant les notes (id, classe, miparcours, final).\n\nEditer le script R, l'enregistrer, puis taper submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script5.R
+
+- Class: script
+  Output: "Vous ne remarquez rien d'étrange dans student_info ? Il contient cinq lignes en double ! Consultez le script pour savoir comment corriger cela. Sauvegardez le script et tapez submit() lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script6.R
+
+- Class: script
+  Output: "Maintenant, en utilisant le script que je viens d'ouvrir pour vous, créez un deuxième tableau appelé gradebook en utilisant les colonnes id, classe, miparcours et final (dans cet ordre).\n\nEditer le script R, enregistrez-le, puis tapez submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script7.R
+
+- Class: text
+  Output: "Il est important de noter que nous avons laissé la colonne id dans les deux tables. Dans le monde des bases de données relationnelles, \"id\" est appelé notre \"clé primaire\" car il nous permet de relier chaque étudiant répertorié dans info_etudiants à ses notes répertoriées dans gradebook. Sans un identifiant unique, nous pourrions ne pas savoir comment les tables sont liées. (Dans ce cas, nous aurions également pu utiliser la variable name, puisque chaque étudiant se trouve avoir un nom unique)."
+
+- Class: text
+  Output: "Le cinquième et dernier scénario de données désordonnées que nous allons aborder est celui où une seule unité d'observation est stockée dans plusieurs tables. C'est l'inverse du quatrième problème."
+
+- Class: cmd_question
+  Output: "Pour illustrer cela, nous avons créé deux ensembles de données, reussir et echoue. Jetez maintenant un coup d'oeil à reussir."
+  CorrectAnswer: reussir
+  AnswerTests: prints_var('reussir')
+  Hint: "Tapez reussir pour voir son contenu."
+
+- Class: cmd_question
+  Output: "Regardez maintenant le contenu de echoue."
+  CorrectAnswer: echoue
+  AnswerTests: prints_var('echoue')
+  Hint: "Tapez echoue pour afficher son contenu."
+
+- Class: text
+  Output: "Les enseignants ont décidé de ne prendre en compte que les notes de l'examen final pour déterminer si les élèves ont réussi ou échoué à chaque cours. Comme vous l'avez peut-être déduit des données, les élèves ont réussi un cours s'ils ont obtenu une note de A ou B à l'examen final et ont échoué dans le cas contraire."
+
+- Class: text
+  Output: The name of each dataset actually represents the value of a new variable that we will call 'status'. Before joining the two tables together, we'll add a new column to each containing this information so that it's not lost when we put everything together.
+
+- Class: cmd_question
+  Output: "Utilisez la fonction mutate() de dplyr pour ajouter une nouvelle colonne à la table reussir. La colonne doit s'appeler status et la valeur, "reussir" (une chaîne de caractères), doit être la même pour tous les étudiants. Écrasez la version actuelle de passed avec la nouvelle."
+  CorrectAnswer: reussir <- reussir %>% mutate(status = "reussir")
+  AnswerTests: any_of_exprs('reussir <- reussir %>% mutate(status = "reussir")', 'reussir <- mutate(reussir, status = "reussir")')
+  Hint: "reussir <- reussir %>% mutate(status = "reussir") fera l'affaire."
+
+- Class: cmd_question
+  Output: "Maintenant, faites la même chose pour la table echoue, sauf que la colonne statut doit avoir la valeur "echoue" pour tous les étudiants."
+  CorrectAnswer: echoue <- echoue %>% mutate(status = "echoue")
+  AnswerTests: any_of_exprs('echoue <- echoue %>% mutate(status = "echoue")', 'echoue <- mutate(echoue, status = "echoue")')
+  Hint: "echoue <- echoue %>% mutate(status = "echoue") est ce que vous recherchez."
+
+- Class: cmd_question
+  Output: "Maintenant, passez comme arguments les tables reussir et echoue (dans l'ordre) à la fonction dplyr bind_rows(), qui les réunira en une seule unité. Consultez ?bind_rows si vous avez besoin d'aide.\n\nNote : bind_rows() n'est disponible que dans dplyr 0.4.0 ou une version ultérieure. Si vous disposez d'une version antérieure de dplyr, veuillez quitter la leçon, mettre à jour dplyr, puis reprendre la leçon là où vous l'avez laissée. Si vous n'êtes pas sûr de la version de dplyr que vous avez, tapez packageVersion('dplyr')."
+  CorrectAnswer: bind_rows(reussir, echoue)
+  AnswerTests: match_call('bind_rows(reussir, echoue)')
+  Hint: "Appelez bind_rows() avec deux arguments, reussir et echoue (dans cet ordre), pour joindre les deux tables."
+
+- Class: text
+  Output: "Bien sûr, nous pouvons arranger les lignes comme nous le souhaitons à ce stade, mais l'important est que chaque ligne est une observation, chaque colonne est une variable et le tableau contient une seule unité d'observation. Ainsi, les données sont bien rangées."
+
+- Class: text
+  Output: "Nous avons couvert beaucoup de choses dans cette leçon. Rassemblons tout et mettons en ordre un véritable ensemble de données."
+
+- Class: text
+  Output: "Le SAT est un examen populaire de préparation à l'université aux États-Unis. Il se compose de trois sections : lecture critique, mathématiques et écriture. Les étudiants peuvent obtenir jusqu'à 800 points dans chaque section. Cet ensemble de données présente le nombre total d'étudiants, pour chaque combinaison de section d'examen et de sexe, dans chacune des six fourchettes de score. Il provient du \"Total Group Report 2013\", qui peut être consulté ici : \n\nhttp://research.collegeboard.org/programs/sat/data/cb-seniors-2013"
+
+- Class: cmd_question
+  Output: "J'ai créé une variable appelée \"sat\" dans votre espace de travail, qui contient des données sur tous les élèves de terminale qui ont passé l'examen SAT en 2013. Imprimez maintenant l'ensemble de données."
+  CorrectAnswer: sat
+  AnswerTests: prints_var('sat')
+  Hint: "Tapez sat pour afficher son contenu."
+
+- Class: script
+  Output: "Comme nous l'avons fait auparavant, nous allons construire une série de commandes enchaînées, en utilisant les fonctions de tidyr et de dplyr. Modifiez le script R, enregistrez-le, puis tapez submit() lorsque vous êtes prêt. Tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script8.R
+
+- Class: script
+  Output: "Terminez le travail en suivant les instructions du script. Sauvegardez le script et tapez submit() lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  AnswerTests: script_vals_identical()
+  Hint: "Lisez attentivement les instructions du script. Si R vous donne une erreur, essayez de comprendre ce qu'il vous dit. Sauvegardez le script et tapez submit() à l'invite lorsque vous êtes prêt, ou tapez reset() pour réinitialiser le script à son état initial."
+  Script: script9.R
+
+- Class: text
+  Output: "Dans cette leçon, vous avez appris à ordonner les données avec tidyr et dplyr. Ces outils vous permettront de consacrer moins de temps et d'énergie à préparer vos données pour les analyser et plus de temps à les analyser réellement."
+

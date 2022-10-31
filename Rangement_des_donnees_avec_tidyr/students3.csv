@@ -1,0 +1,11 @@
+"nom","test","cours1","cours2","cours3","cours4","cours5"
+"Sally","mi-parcours","A",,"B",,
+"Sally","final","C",,"C",,
+"Jeff","mi-parcours",,"D",,"A",
+"Jeff","final",,"E",,"C",
+"Roger","mi-parcours",,"C",,,"B"
+"Roger","final",,"A",,,"A"
+"Karen","mi-parcours",,,"C","A",
+"Karen","final",,,"C","A",
+"Brian","mi-parcours","B",,,,"A"
+"Brian","final","B",,,,"C"
