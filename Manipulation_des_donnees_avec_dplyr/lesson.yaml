@@ -55,10 +55,10 @@
   Hint: "Tapez cran <- as_tibble(mondf) pour créer un nouveau as_tibble appelé cran."
 
 - Class: cmd_question
-  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le trame de données original de votre espace de travail avec rm(\"mondf\")."
-  CorrectAnswer: rm("mondf")
-  AnswerTests: omnitest(correctExpr='rm("mondf")')
-  Hint: "Utilisez rm(\"mondf\") pour supprimer le trame de données original de votre espace de travail."
+  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le trame de données original de votre espace de travail avec rm(mondf)."
+  CorrectAnswer: rm(mondf)
+  AnswerTests: omnitest(correctExpr='rm(mondf)')
+  Hint: "Utilisez rm(mondf) pour supprimer le trame de données original de votre espace de travail."
 
 - Class: cmd_question
   Output: "D'après ?as_tibble, \"Le principal avantage d'utiliser un as_tibble par rapport à un trame de données ordinaire est l'impression.\" Voyons ce que cela signifie. Tapez cran pour imprimer notre as_tibble à la console."
