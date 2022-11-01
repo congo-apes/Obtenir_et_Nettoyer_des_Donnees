@@ -19,7 +19,7 @@
   Hint: "Tapez library(tidyr) pour (re)charger le paquetage tidyr."
 
 - Class: text
-  Output: "L'auteur de tidyr, Hadley Wickham, expose sa philosophie des données ordonnées dans son article intitulé \"Tidy Data\" :\n\n http://vita.had.co.nz/papers/tidy-data.pdf. Cet article devrait être lu par tous ceux qui travaillent avec des données, mais il n'est pas nécessaire pour suivre cette leçon."
+  Output: "L'auteur de tidyr, Hadley Wickham, expose sa philosophie des données ordonnées dans son article intitulé \"Tidy Data\" :\n\n http://vita.had.co.nz/papers/tidy-data.pdf\n\n Cet article devrait être lu par tous ceux qui travaillent avec des données, mais il n'est pas nécessaire pour suivre cette leçon."
 
 - Class: text
   Output: "Les données tidy sont formatées d'une manière standard qui facilite l'exploration et l'analyse et fonctionnent de manière transparente avec d'autres outils tidy data. Plus précisément, les données tidy satisfont à trois conditions :\n\n1) Chaque variable forme une colonne\n\n2) Chaque observation forme une ligne\n\n\n3) Chaque type d'unité d'observation forme un tableau"
