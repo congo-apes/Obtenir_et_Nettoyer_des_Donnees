@@ -32,9 +32,9 @@
 
 - Class: cmd_question
   Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le dataframe original de votre espace de travail avec rm(\"mon_df\")."
-  CorrectAnswer: rm("mon_df")
-  AnswerTests: omnitest(correctExpr='rm("mon_df")')
-  Hint: "Utilisez rm(\"mon_df\") pour supprimer le trame de données original de votre espace de travail."
+  CorrectAnswer: rm(mon_df)
+  AnswerTests: omnitest(correctExpr='rm(mon_df)')
+  Hint: "Utilisez rm(mon_df) pour supprimer le trame de données original de votre espace de travail."
 
 - Class: cmd_question
   Output: "Imprimez cran à la console."
@@ -151,7 +151,7 @@
   Hint: "Utilisez quantile(res_paq$unique, probs = 0.99) pour obtenir le quantile de 0.99, ou 99% pour 'unique'."
 
 - Class: cmd_question
-  Output: "Appliquez un filtre() à res_paq pour sélectionner toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à un objet appelé uniques_meilleurs."
+  Output: "Appliquez un filter() à res_paq pour sélectionner toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à un objet appelé uniques_meilleurs."
   CorrectAnswer: uniques_meilleurs <- filter(res_paq, unique > 465)
   AnswerTests: omnitest('uniques_meilleurs <- filter(res_paq, unique > 465)')
   Hint: "filter(res_paq, unique > 465) sélectionnera toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à uniques_meilleurs."
@@ -169,7 +169,7 @@
   Hint: "arrange(uniques_meilleurs, desc(unique)) classera les lignes de uniques_meilleurs en fonction des valeurs de la variable 'unique', par ordre décroissant. Affectez le résultat à uniques_meilleurs_tries."
 
 - Class: cmd_question
-  Output: "Visualisez() les données triées."
+  Output: "View() les données triées."
   CorrectAnswer: View(uniques_meilleurs_tries)
   AnswerTests: omnitest('View(uniques_meilleurs_tries)')
   Hint: "View(uniques_meilleurs_tries) affichera les données triées."
@@ -196,7 +196,7 @@
   Output: "Nous aimerions obtenir le même résultat que le dernier script, mais éviter de sauvegarder nos résultats intermédiaires. Pour cela, il faut intégrer des appels de fonction les uns dans les autres."
 
 - Class: script
-  Output: "C'est exactement ce que nous avons fait dans ce script. Le résultat est équivalent, mais le code est beaucoup moins lisible et certains des arguments sont éloignés de la fonction à laquelle ils appartiennent. Encore une fois, essayez simplement de comprendre ce qui se passe ici, puis soumettez() lorsque vous êtes prêt à voir une meilleure solution."
+  Output: "C'est exactement ce que nous avons fait dans ce script. Le résultat est équivalent, mais le code est beaucoup moins lisible et certains des arguments sont éloignés de la fonction à laquelle ils appartiennent. Encore une fois, essayez simplement de comprendre ce qui se passe ici, puis submit() lorsque vous êtes prêt à voir une meilleure solution."
   AnswerTests: script_results_identical('resultat2'); multi_expr_creates_var('resultat2')
   Hint: "Si vous avez accidentellement modifié quelque chose dans le script, il suffit de taper reset() pour annuler vos modifications, puis submit() à nouveau."
   Script: summarize3.R
@@ -211,7 +211,7 @@
   Output: "Ainsi, les résultats des trois derniers scripts sont tous identiques. Mais, le troisième script offre une alternative pratique et concise à la méthode plus traditionnelle que nous avons adoptée précédemment, qui consiste à enregistrer les résultats au fur et à mesure."
 
 - Class: cmd_question
-  Output: "Une fois encore, visualisons() les données complètes, qui ont été stockées dans resultat3."
+  Output: "Une fois encore, View() les données complètes, qui ont été stockées dans resultat3."
   CorrectAnswer: View(resultat3)
   AnswerTests: omnitest('View(resultat3)')
   Hint: "View(resultat3) affichera les données complètes, au lieu des 10 premières lignes seulement."
