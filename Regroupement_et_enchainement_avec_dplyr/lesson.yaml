@@ -163,7 +163,7 @@
   Hint: "Tapez View(uniques_meilleurs) pour voir le résultat."
 
 - Class: cmd_question
-  Output: "Maintenant, classez() uniques_meilleurs par la colonne 'unique', par ordre décroissant, pour voir quels paquets ont été téléchargés à partir du plus grand nombre d'adresses IP uniques. Affectez le résultat à uniques_meilleurs_tries."
+  Output: "Maintenant, arrange() uniques_meilleurs par la colonne 'unique', par ordre décroissant, pour voir quels paquets ont été téléchargés à partir du plus grand nombre d'adresses IP uniques. Affectez le résultat à uniques_meilleurs_tries."
   CorrectAnswer: uniques_meilleurs_tries <- arrange(uniques_meilleurs, desc(unique))
   AnswerTests: omnitest('uniques_meilleurs_tries <- arrange(uniques_meilleurs, desc(unique))')
   Hint: "arrange(uniques_meilleurs, desc(unique)) classera les lignes de uniques_meilleurs en fonction des valeurs de la variable 'unique', par ordre décroissant. Affectez le résultat à uniques_meilleurs_tries."
