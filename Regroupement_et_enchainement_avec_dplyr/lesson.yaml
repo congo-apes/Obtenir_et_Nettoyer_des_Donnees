@@ -157,7 +157,7 @@
   Hint: "filter(res_paq, unique > 465) sélectionnera toutes les lignes correspondant aux valeurs de 'unique' qui sont strictement supérieures à 465. Affectez le résultat à uniques_meilleurs."
 
 - Class: cmd_question
-  Output: "Regardons() nos meilleurs candidats !"
+  Output: "View() nos meilleurs candidats !"
   CorrectAnswer: View(uniques_meilleurs)
   AnswerTests: omnitest('View(uniques_meilleurs)')
   Hint: "Tapez View(uniques_meilleurs) pour voir le résultat."
