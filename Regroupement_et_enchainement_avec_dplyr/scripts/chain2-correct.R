@@ -1,9 +1,10 @@
-# Use mutate() to add a column called size_mb that contains
-# the size of each download in megabytes (i.e. size / 2^20).
-#
-# If you want your results printed to the console, add
-# print to the end of your chain.
+# Utilisez mutate() pour ajouter une colonne appelée taille_mo 
+# qui contient la taille de chaque téléchargement en mégaoctets 
+# (c'est-à-dire taille / 2^20).
+# 
+# Si vous voulez que vos résultats soient imprimés sur la console, 
+# ajoutez print à la fin de votre chaîne.
 
 cran %>%
-  select(ip_id, country, package, size) %>%
-  mutate(taille_mo = size / 2^20)
+	select(ip_id, pays, paquet, taille) %>%
+  mutate(taille_mo = taille / 2^20)

@@ -5,11 +5,11 @@
 
 resultat3 <-
   cran %>%
-  group_by(package) %>%
+  group_by(paquet) %>%
   summarize(compte = n(),
             unique = n_distinct(ip_id),
-            pays = n_distinct(country),
-            octets_moyens = mean(size)
+            pays = n_distinct(pays),
+            octets_moyens = mean(taille)
   ) %>%
   filter(pays > 60) %>%
   arrange(desc(pays), octets_moyens)

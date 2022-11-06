@@ -7,12 +7,12 @@ resultat2 <-
     filter(
       summarize(
         group_by(cran,
-                 package
+                 paquet
         ),
         compte = n(),
         unique = n_distinct(ip_id),
-        pays = n_distinct(country),
-        octets_moyens = mean(size)
+        pays = n_distinct(paquet),
+        octets_moyens = mean(taille)
       ),
       pays > 60
     ),

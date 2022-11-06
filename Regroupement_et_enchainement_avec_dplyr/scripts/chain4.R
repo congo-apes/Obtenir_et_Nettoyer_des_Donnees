@@ -4,7 +4,7 @@
 # console, ajoutez print à la fin de votre chaîne.
 
 cran %>%
-  select(ip_id, country, package, size) %>%
-  mutate(taille_mo = size / 2^20) %>%
+	select(ip_id, pays, paquet, taille) %>%
+	mutate(taille_mo = taille / 2^20) %>%
   filter(taille_mo <= 0.5) %>%
   # Votre appel à arrange() va ici.

@@ -10,5 +10,5 @@ chemin_csv <- file.path(.get_course_path(),
                       '2014-07-08.csv')
 
 cran <- as_tibble(read.csv(chemin_csv, stringsAsFactors = FALSE))
-cran2 <- select(cran, size:ip_id)
-cran3 <- select(cran, ip_id, package, size)
+cran2 <- select(cran, taille:ip_id)
+cran3 <- select(cran, ip_id, paquet, taille)

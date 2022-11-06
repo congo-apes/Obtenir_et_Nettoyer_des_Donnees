@@ -3,8 +3,8 @@
 # 
 # 1. compte = n()
 # 2. unique = n_distinct(ip_id)
-# 3. pays = n_distinct(country)
-# 4. octets_moyens = mean(size)
+# 3. pays = n_distinct(pays)
+# 4. octets_moyens = mean(taille)
 # 
 # Quelques points auxquels il faut faire attention :
 # 

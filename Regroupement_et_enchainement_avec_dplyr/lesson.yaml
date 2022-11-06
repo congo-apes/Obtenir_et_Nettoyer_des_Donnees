@@ -31,7 +31,7 @@
   Hint: "Tapez cran <- as_tibble(mon_df) pour stocker les données dans un nouvel as_tibble appelé cran."
 
 - Class: cmd_question
-  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le dataframe original de votre espace de travail avec rm(\"mon_df\")."
+  Output: "Pour éviter toute confusion et assurer le bon déroulement des opérations, supprimons le dataframe original de votre espace de travail avec rm(mon_df)."
   CorrectAnswer: rm(mon_df)
   AnswerTests: omnitest(correctExpr='rm(mon_df)')
   Hint: "Utilisez rm(mon_df) pour supprimer le trame de données original de votre espace de travail."
@@ -49,10 +49,10 @@
   Hint: "Utilisez ?group_by pour faire apparaître la documentation."
 
 - Class: cmd_question
-  Output: "Regroupez cran par la variable \"package\" et stockez le résultat dans un nouvel objet appelé par_paquet."
-  CorrectAnswer: par_paquet <- group_by(cran, package)
-  AnswerTests: omnitest('par_paquet <- group_by(cran, package)')
-  Hint: "Stockez le résultat de group_by(cran, package) dans un nouvel objet appelé par_paquet."
+  Output: "Regroupez cran par la variable \"paquet\" et stockez le résultat dans un nouvel objet appelé par_paquet."
+  CorrectAnswer: par_paquet <- group_by(cran, paquet)
+  AnswerTests: omnitest('par_paquet <- group_by(cran, paquet)')
+  Hint: "Stockez le résultat de group_by(cran, paquet) dans un nouvel objet appelé par_paquet."
 
 - Class: cmd_question
   Output: "Jetons un coup d'oeil à par_paquet. Imprimez-le sur la console."
@@ -61,16 +61,16 @@
   Hint: "Tapez par_paquet pour voir son contenu."
 
 - Class: text
-  Output: "En haut de la sortie ci-dessus, vous verrez 'Groups : package', ce qui nous indique que cette tbl a été groupée par la variable package. Tout le reste semble identique, mais maintenant toute opération que nous appliquons aux données groupées aura lieu sur une base par paquet."
+  Output: "En haut de la sortie ci-dessus, vous verrez 'Groups : paquet', ce qui nous indique que cette tbl a été groupée par la variable paquet. Tout le reste semble identique, mais maintenant toute opération que nous appliquons aux données groupées aura lieu sur une base par paquet."
 
 - Class: text
-  Output: "Rappelez-vous que lorsque nous avons appliqué mean(size) à l'as_tibble original via summarize(), il a renvoyé un seul nombre -- la moyenne de toutes les valeurs de la colonne size. Ce nombre peut nous intéresser, mais ne serait-il pas beaucoup plus intéressant de regarder la taille moyenne de téléchargement pour chaque paquet unique ?"
+  Output: "Rappelez-vous que lorsque nous avons appliqué mean(taille) à l'as_tibble original via summarize(), il a renvoyé un seul nombre -- la moyenne de toutes les valeurs de la colonne taille. Ce nombre peut nous intéresser, mais ne serait-il pas beaucoup plus intéressant de regarder la taille moyenne de téléchargement pour chaque paquet unique ?"
 
 - Class: cmd_question
-  Output: "C'est exactement ce que vous obtiendrez si vous utilisez summarize() pour appliquer mean(size) aux données groupées dans par_paquet. Essayez-le."
-  CorrectAnswer: summarize(par_paquet, mean(size))
-  AnswerTests: any_of_exprs('summarize(par_paquet, mean(size))', 'summarise(par_paquet, mean(size))')
-  Hint: "Appelez summarize() avec deux arguments : par_paquet et mean(size)."
+  Output: "C'est exactement ce que vous obtiendrez si vous utilisez summarize() pour appliquer mean(taille) aux données groupées dans par_paquet. Essayez-le."
+  CorrectAnswer: summarize(par_paquet, mean(taille))
+  AnswerTests: any_of_exprs('summarize(par_paquet, mean(taille))', 'summarise(par_paquet, mean(taille))')
+  Hint: "Appelez summarize() avec deux arguments : par_paquet et mean(taille)."
 
 - Class: text
   Output: "Au lieu de renvoyer une seule valeur, summarize() renvoie maintenant la taille moyenne pour CHAQUE paquet de notre ensemble de données."
@@ -88,7 +88,7 @@
   Hint: "Tapez res_paq pour afficher son contenu."
 
 - Class: text
-  Output: "La colonne 'compte', créée avec n(), contient le nombre total de lignes (c'est-à-dire de téléchargements) pour chaque paquet. La colonne 'unique', créée avec n_distinct(ip_id), donne le nombre total de téléchargements uniques pour chaque paquet, mesuré par le nombre d'ip_id distincts. La colonne 'pays', créée avec n_distinct(country), indique le nombre de pays dans lesquels chaque paquet a été téléchargé. Et enfin, la colonne 'octets_moyens', créée avec mean(size), contient la taille moyenne des téléchargements (en octets) pour chaque paquet."
+  Output: "La colonne 'compte', créée avec n(), contient le nombre total de lignes (c'est-à-dire de téléchargements) pour chaque paquet. La colonne 'unique', créée avec n_distinct(ip_id), donne le nombre total de téléchargements uniques pour chaque paquet, mesuré par le nombre d'ip_id distincts. La colonne 'pays', créée avec n_distinct(pays), indique le nombre de pays dans lesquels chaque paquet a été téléchargé. Et enfin, la colonne 'octets_moyens', créée avec mean(taille), contient la taille moyenne des téléchargements (en octets) pour chaque paquet."
 
 - Class: text
   Output: "Il est important que vous compreniez comment chaque colonne de res_paq a été créée et ce qu'elle signifie. Maintenant que nous avons résumé les données par paquet individuel, jouons un peu plus avec pour voir ce que nous pouvons apprendre."

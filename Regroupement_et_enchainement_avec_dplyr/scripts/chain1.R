@@ -4,9 +4,9 @@
 # dans votre appel à select().
 # 
 # 1. ip_id
-# 2. country
-# 3. package
-# 4. size
+# 2. pays
+# 3. paquet
+# 4. taille
 # 
 # L'appel à print() à la fin de la chaîne est facultatif, mais 
 # nécessaire si vous voulez que vos résultats soient imprimés sur 

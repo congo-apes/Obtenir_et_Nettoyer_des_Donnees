@@ -11,4 +11,4 @@
 mon_df <- read.csv(.chemin_csv, as.is = TRUE)
 
 cran <- as_tibble(mon_df)
-par_paquet <- group_by(cran, package)
+par_paquet <- group_by(cran, paquet)

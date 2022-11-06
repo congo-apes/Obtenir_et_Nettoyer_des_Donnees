@@ -4,12 +4,12 @@
 # Nous avons déjà fait cette partie, mais nous la répétons ici 
 # pour plus de clarté.
 
-par_paquet <- group_by(cran, package)
+par_paquet <- group_by(cran, paquet)
 res_paq <- summarize(par_paquet,
 										 compte = n(),
 										 unique = n_distinct(ip_id),
-										 pays = n_distinct(country),
-										 octets_moyens = mean(size))
+										 pays = n_distinct(pays),
+										 octets_moyens = mean(taille))
 
 # Voici la nouvelle partie, mais en utilisant la même approche 
 # que celle que nous utilisons depuis le début.
