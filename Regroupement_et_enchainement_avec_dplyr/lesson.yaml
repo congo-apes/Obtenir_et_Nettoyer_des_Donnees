@@ -97,7 +97,7 @@
   Output: "Naturellement, nous aimerions savoir quels paquets étaient les plus populaires le jour où ces données ont été recueillies (8 juillet 2014). Commençons par isoler les 1 % de paquets les plus populaires, sur la base du nombre total de téléchargements, mesuré par la colonne 'compte'."
 
 - Class: cmd_question
-  Output: "Nous devons connaître la valeur de 'compte' qui divise les données entre les 1 % de paquets les plus importants et les 99 % les moins importants en fonction du nombre total de téléchargements. En statistiques, cela s'appelle le quantile d'échantillon de 0,99, ou 99 %. Utilisez quantile(res_paq$compte, probs = 0.99) pour déterminer ce nombre."
+  Output: "Nous devons connaître la valeur de 'compte' qui divise les données entre les 1 % de paquets les plus importants et les 99 % les moins importants en fonction du nombre total de téléchargements. En statistiques, cela s'appelle le quantile d'échantillon de 0.99, ou 99 %. Utilisez quantile(res_paq$compte, probs = 0.99) pour déterminer ce nombre."
   CorrectAnswer: quantile(res_paq$compte, probs = 0.99)
   AnswerTests: omnitest('quantile(res_paq$compte, probs = 0.99)')
   Hint: "quantile(res_paq$compte, probs = 0.99) nous donnera le quantile d'échantillon de 0.99, ou 99%, pour la variable 'compte'."
@@ -145,7 +145,7 @@
   Output: "Nous sommes peut-être plus intéressés par le nombre de téléchargements *uniques* au cours de cette journée particulière. En d'autres termes, si un paquet est téléchargé dix fois en un jour à partir du même ordinateur, nous pouvons souhaiter le compter comme un seul téléchargement. C'est ce que la colonne 'unique' nous dira."
 
 - Class: cmd_question
-  Output: "Comme nous l'avons fait avec 'compte', trouvons le quantile 0,99, ou 99%, pour la variable 'unique' avec quantile(res_paq$unique, probs = 0.99)."
+  Output: "Comme nous l'avons fait avec 'compte', trouvons le quantile 0.99, ou 99%, pour la variable 'unique' avec quantile(res_paq$unique, probs = 0.99)."
   CorrectAnswer: quantile(res_paq$unique, probs = 0.99)
   AnswerTests: omnitest('quantile(res_paq$unique, probs = 0.99)')
   Hint: "Utilisez quantile(res_paq$unique, probs = 0.99) pour obtenir le quantile de 0.99, ou 99% pour 'unique'."

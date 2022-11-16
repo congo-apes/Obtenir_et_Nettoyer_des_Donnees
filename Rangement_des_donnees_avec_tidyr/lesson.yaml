@@ -80,7 +80,7 @@
   Output: "Commençons par utiliser gather() pour empiler les colonnes de etudiants2, comme nous venons de le faire avec students. Cette fois, nommez la colonne \"key\" sexe_classe et la colonne \"value\" compte. Enregistrez le résultat dans une nouvelle variable appelée res. Consultez à nouveau ?gather si vous avez besoin d'aide."
   CorrectAnswer: res <- gather(etudiants2, sexe_classe, compte, -note)
   AnswerTests: match_call('res <- gather(etudiants2, sexe_classe, compte, -note)')
-  Hint: "Call gather() with the following arguments (in order): etudiants2, sexe_classe, compte, -note). Store the result in a variable called res."
+  Hint: "Appelez gather() avec les arguments suivants (dans l'ordre) : etudiants2, sexe_classe, compte, -note. Stockez le résultat dans une variable appelée res."
 
 - Class: cmd_question
   Output: "Imprimez res à la console pour voir ce que nous avons accompli."
@@ -212,19 +212,19 @@
   Output: "Les enseignants ont décidé de ne prendre en compte que les notes de l'examen final pour déterminer si les élèves ont réussi ou échoué à chaque cours. Comme vous l'avez peut-être déduit des données, les élèves ont réussi un cours s'ils ont obtenu une note de A ou B à l'examen final et ont échoué dans le cas contraire."
 
 - Class: text
-  Output: The name of each dataset actually represents the value of a new variable that we will call 'status'. Before joining the two tables together, we'll add a new column to each containing this information so that it's not lost when we put everything together.
+  Output: "Le nom de chaque ensemble de données représente en fait la valeur d'une nouvelle variable que nous appellerons \"statut\". Avant de réunir les deux tableaux, nous ajouterons à chacun une nouvelle colonne contenant cette information afin qu'elle ne soit pas perdue lorsque nous assemblerons le tout."
 
 - Class: cmd_question
-  Output: "Utilisez la fonction mutate() de dplyr pour ajouter une nouvelle colonne à la table reussir. La colonne doit s'appeler status et la valeur, \"reussir\" (une chaîne de caractères), doit être la même pour tous les étudiants. Écrasez la version actuelle de passed avec la nouvelle."
-  CorrectAnswer: reussir <- reussir %>% mutate(status = "reussir")
-  AnswerTests: any_of_exprs('reussir <- reussir %>% mutate(status = "reussir")', 'reussir <- mutate(reussir, status = "reussir")')
-  Hint: "reussir <- reussir %>% mutate(status = \"reussir\") fera l'affaire."
+  Output: "Utilisez la fonction mutate() de dplyr pour ajouter une nouvelle colonne à la table reussir. La colonne doit s'appeler statut et la valeur, \"reussir\" (une chaîne de caractères), doit être la même pour tous les étudiants. Écrasez la version actuelle de passed avec la nouvelle."
+  CorrectAnswer: reussir <- reussir %>% mutate(statut = "reussir")
+  AnswerTests: any_of_exprs('reussir <- reussir %>% mutate(statut = "reussir")', 'reussir <- mutate(reussir, statut = "reussir")')
+  Hint: "reussir <- reussir %>% mutate(statut = \"reussir\") fera l'affaire."
 
 - Class: cmd_question
   Output: "Maintenant, faites la même chose pour la table echoue, sauf que la colonne statut doit avoir la valeur \"echoue\" pour tous les étudiants."
-  CorrectAnswer: echoue <- echoue %>% mutate(status = "echoue")
-  AnswerTests: any_of_exprs('echoue <- echoue %>% mutate(status = "echoue")', 'echoue <- mutate(echoue, status = "echoue")')
-  Hint: "echoue <- echoue %>% mutate(status = \"echoue\") est ce que vous recherchez."
+  CorrectAnswer: echoue <- echoue %>% mutate(statut = "echoue")
+  AnswerTests: any_of_exprs('echoue <- echoue %>% mutate(statut = "echoue")', 'echoue <- mutate(echoue, statut = "echoue")')
+  Hint: "echoue <- echoue %>% mutate(statut = \"echoue\") est ce que vous recherchez."
 
 - Class: cmd_question
   Output: "Maintenant, passez comme arguments les tables reussir et echoue (dans l'ordre) à la fonction dplyr bind_rows(), qui les réunira en une seule unité. Consultez ?bind_rows si vous avez besoin d'aide.\n\nNote : bind_rows() n'est disponible que dans dplyr 0.4.0 ou une version ultérieure. Si vous disposez d'une version antérieure de dplyr, veuillez quitter la leçon, mettre à jour dplyr, puis reprendre la leçon là où vous l'avez laissée. Si vous n'êtes pas sûr de la version de dplyr que vous avez, tapez packageVersion('dplyr')."

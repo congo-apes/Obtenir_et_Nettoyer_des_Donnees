@@ -19,7 +19,7 @@
   Output: "J'ai créé une variable appelée chemin_csv, qui contient le chemin d'accès complet au jeu de données. Appelez read.csv() avec deux arguments, chemin_csv et stringsAsFactors = FALSE, et enregistrez le résultat dans une nouvelle variable appelée mon_df. Consultez ?read.csv si vous avez besoin d'aide."
   CorrectAnswer: mon_df <- read.csv(chemin_csv, stringsAsFactors = FALSE)
   AnswerTests: omnitest(correctExpr='mon_df <- read.csv(chemin_csv, stringsAsFactors = FALSE)')
-  Hint: "Store the result of read.csv(chemin_csv, stringsAsFactors = FALSE) in a new variable called mon_df."
+  Hint: "Stockez le résultat de read.csv(chemin_csv, stringsAsFactors = FALSE) dans une nouvelle variable appelée mon_df."
 
 - Class: cmd_question
   Output: "Utilisez dim() pour examiner les dimensions de mon_df."
